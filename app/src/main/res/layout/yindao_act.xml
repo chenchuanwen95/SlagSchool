@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/welcome1"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_textSizePercent="7%"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="渣校"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_textSizePercent="3%"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="寻找属于你的地方"/>
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_textSizePercent="2%"
+        android:layout_marginBottom="22dp"
+        android:gravity="center"
+        android:text="C:1.0"/>
+</com.zhy.android.percent.support.PercentLinearLayout>
