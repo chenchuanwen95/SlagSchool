@@ -24,6 +24,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.context = context ;
         this.lists = lists ;
     }
+    public List<SchoolInfo> getList() {
+        return lists;
+    }
     //创建新的View视图
     @Override
     public MyRecyclerViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -34,21 +37,24 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     //将数据与界面进行绑定
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.schoolName.setText(lists.get(position).getSchoolName()+"");
-        holder.address.setText(lists.get(position).getAddress()+"");
-        holder.isNotional.setText(lists.get(position).getIsNotional()+"");
-        holder.isDegree.setText(lists.get(position).getIsDegree()+"");
-        holder.score.setText("分数线: "+lists.get(position).getScore());
-        holder.prepareNumber.setText("预招: "+lists.get(position).getPrepareNumber());
-        holder.remainNumber.setText(lists.get(position).getRemainNumber()+" :剩余");
-        holder.cutTime.setText("截止报名时间: "+lists.get(position).getCutTime());
-        holder.foundedTime.setText("建校日期:"+lists.get(position).getFoundedTime());
+        if(holder instanceof  MyViewHolder){
+            holder.schoolName.setText(lists.get(position).getSchoolName()+"");
+            holder.address.setText(lists.get(position).getAddress()+"");
+            holder.isNotional.setText(lists.get(position).getIsNotional()+"");
+            holder.isDegree.setText(lists.get(position).getIsDegree()+"");
+            holder.score.setText("分数线: "+lists.get(position).getScore());
+            holder.prepareNumber.setText("预招: "+lists.get(position).getPrepareNumber());
+            holder.remainNumber.setText(lists.get(position).getRemainNumber()+" :剩余");
+            holder.cutTime.setText("截止报名时间: "+lists.get(position).getCutTime());
+            holder.foundedTime.setText("建校日期:"+lists.get(position).getFoundedTime());
+        }
     }
     //一次返回数据的条数
     @Override
     public int getItemCount() {
         return lists.size();
     }
+
     class MyViewHolder extends RecyclerView.ViewHolder{
         public MyImageView schoolTitle ;  //学校校标
         public ImageView isRenZheng ;   //是否已认证

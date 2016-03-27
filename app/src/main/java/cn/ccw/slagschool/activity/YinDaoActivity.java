@@ -128,4 +128,8 @@ public class YinDaoActivity extends FragmentActivity{
                 break ;
         }
     }*/
+
+    @Override
+    public void onBackPressed() {
+    }
 }

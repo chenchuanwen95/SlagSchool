@@ -1,17 +1,20 @@
 package cn.ccw.slagschool.activity;
 
 import android.annotation.TargetApi;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -19,20 +22,27 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ServiceConfigurationError;
 
 import cn.ccw.slagschool.R;
 import cn.ccw.slagschool.adapter.MyRecyclerViewAdapter;
 import cn.ccw.slagschool.base.BaseActivity;
 import cn.ccw.slagschool.base.BaseInteface;
+import cn.ccw.slagschool.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import cn.ccw.slagschool.recyclerview.RecyclerViewUtils;
 import cn.ccw.slagschool.vo.SchoolInfo;
-import cn.ccw.slagschool.weight.MySwipeRefreshLayout;
+import cn.ccw.slagschool.weight.LoadingFooter;
+import cn.ccw.slagschool.weight.PullRefreshLayout;
+import cn.ccw.slagschool.weight.SampleFooter;
 
 public class MainActivity extends BaseActivity implements BaseInteface {
-    private SwipeRefreshLayout mSwipeRefreshLayout ;
+    private PullRefreshLayout mPullRefreshLayout ;
     private RecyclerView mRecyclerView ;
+    private View layout ;
+    private PopupWindow pw ;
+    private boolean flag ;
     private LinearLayoutManager mLinearLayoutManager ;
     private MyRecyclerViewAdapter adapter  ;
+    private HeaderAndFooterRecyclerViewAdapter mAdapter ;
     private List<SchoolInfo> lists ;
     private SchoolInfo mSchoolInfo ;
     private int lastVisibleItem = 0;
@@ -65,59 +75,43 @@ public class MainActivity extends BaseActivity implements BaseInteface {
     @Override
     public void initViews() {
         /**
-         *这里是在对SwipeRefreshlayout进行初始化
+         *这里是在对PullRefreshLayout进行初始化
          */
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
+        layout = getLayoutInflater().inflate(R.layout.home_activity,null) ;
+        mPullRefreshLayout = (PullRefreshLayout) findViewById(R.id.pullrefreshlayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+//        mPullRefreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_WATER_DROP);
+        //设置每个Item的高度是固定的，可以提高性能
+        mRecyclerView.setHasFixedSize(true);
         mLinearLayoutManager = new LinearLayoutManager(this) ;
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        //设置每个Item的高度是固定的，可以提高性能
-        mRecyclerView.setHasFixedSize(true);
 
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void initDatas() {
-
-
-        //这里是RecylerView的滑动事件
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
+        View mView = getLayoutInflater().inflate(R.layout.popupwindow_layout,null) ;
+        pw = new PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT, true) ;
+        pw.setTouchable(true);
+        pw.setTouchInterceptor(new View.OnTouchListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView,
-                                             int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem + 1 == adapter.getItemCount()) {
-                    mSwipeRefreshLayout.setRefreshing(true);
-                    // 此处在现实项目中，请换成网络请求数据代码，sendRequest .....
-//                    handler.sendEmptyMessageDelayed(0, 3000);
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-//                lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
-            }
-
-        });
-        //这里是对SwipeRefreshlayout组件进行设置 一些背景颜色和大小
-        mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED);
-//        mSwipeRefreshLayout.setProgressViewEndTarget(true, 300);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 3000);
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
             }
         });
+        pw.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0f);
+            }
+        });
+        pw.setAnimationStyle(R.style.popupAnim);
+        pw.setBackgroundDrawable(getResources().getDrawable(R.mipmap.bg));
+
+//设置RecylerView的填充组件
+        initSchoolInfo() ;
     }
 
     //模拟数据
@@ -137,39 +131,113 @@ public class MainActivity extends BaseActivity implements BaseInteface {
             lists.add(mSchoolInfo) ;
         }
         adapter = new MyRecyclerViewAdapter(this,lists);
-        mRecyclerView.setAdapter(adapter);
+        mAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter) ;
+        mRecyclerView.setAdapter(mAdapter);
+        RecyclerViewUtils.setFooterView(mRecyclerView, new SampleFooter(this));
     }
     /**
      * 这里是titleBar上面的图片点击事件
      * @param view
      */
     public void imageOnClick(View view){
-        ImageView iv = (ImageView) view;
-        switch (iv.getId()){
+        switch (view.getId()){
             case R.id.more:
-                View mView = getLayoutInflater().inflate(R.layout.popupwindow_layout,null) ;
-                PopupWindow pw = new PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true) ;
-                pw.setTouchable(true);
-                pw.setTouchInterceptor(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return false;
-                    }
-                });
-                pw.setAnimationStyle(R.style.popupAnim);
-                pw.setBackgroundDrawable(getResources().getDrawable(R.mipmap.bg));
-                pw.showAsDropDown(iv);
+                backgroundAlpha(0.3f);
+                pw.showAtLocation(layout, Gravity.CENTER,0,0);
                 break;
             case R.id.setting:
                 Toast.makeText(MainActivity.this, "点击了设置按钮", Toast.LENGTH_SHORT).show();
+                break ;
+            case R.id.search_layout:
+                Intent intent = new Intent(MainActivity.this,SearchSchool.class) ;
+                startActivity(intent);
+                pw.dismiss();
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout) ;
                 break ;
         }
     }
 
     @Override
-   public void initViewOper() {
-        //设置RecylerView的填充组件
-        initSchoolInfo() ;
+    public void initViewOper() {
+        mPullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+
+        //这里是RecylerView的滑动事件
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
+            //用来标记是否正在向最后一个滑动，既是否向右滑动或向下滑动
+            boolean isSlidingToLast = false;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                LinearLayoutManager manager = (LinearLayoutManager)recyclerView.getLayoutManager();
+                // 当不滚动时
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //获取最后一个完全显示的ItemPosition
+                    int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
+                    int totalItemCount = manager.getItemCount();
+
+                    // 判断是否滚动到底部，并且是向右滚动
+                    if (lastVisibleItem == (totalItemCount -1) && isSlidingToLast) {
+                        //加载更多功能的代码
+                        Toast.makeText(MainActivity.this,"加载更多",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //dx用来判断横向滑动方向，dy用来判断纵向滑动方向
+                if(dx > 0){
+                    //大于0表示，正在向右滚动
+                    isSlidingToLast = true;
+                }else{
+                    //小于等于0 表示停止或向左滚动
+                    isSlidingToLast = false;
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 这里是让当前的界面变透明
+     */
+    public void backgroundAlpha(float bgAlpha)
+    {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(flag){
+            super.onBackPressed();
+        }else{
+            toastS("再次点击退出");
+            flag = true ;
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        toastS("退出异常");
+                    }
+                    flag = false ;
+                }
+            }.start();
+        }
     }
 
     @Override

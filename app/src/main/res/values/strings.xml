@@ -2,4 +2,20 @@
     <string name="app_name">渣校</string>
     <string name="yin_next">下一页</string>
     <string name="yin_action">点击进入</string>
+    <array name="scheme_colors">
+        <item>@color/orange</item>
+        <item>@color/pink</item>
+        <item>@color/green</item>
+        <item>@color/blue</item>
+    </array>
+    <integer-array name="google_colors">
+        <item>@color/red</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+    </integer-array>
+    <string name="footer_text">上拉加载</string>
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
 </resources>
