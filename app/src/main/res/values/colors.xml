@@ -12,5 +12,5 @@
     <color name="green1">#00caca</color>
 
     <color name="color_ff">#F0F0F0</color>
-    <color name="color_00">#8A000000</color>
+    <color name="color_00">#8A00caca</color>
 </resources>

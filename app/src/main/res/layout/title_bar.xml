@@ -29,7 +29,7 @@
         app:layout_textSizePercent="3.5%"
         android:gravity="center"
         android:textColor="#ecf0f1"
-        android:text="渣校列表"/>
+        android:text="@string/title_bar_title"/>
     <TextView
         android:layout_width="0dip"
         android:layout_height="1dip"

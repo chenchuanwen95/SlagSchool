@@ -7,15 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -24,15 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.ccw.slagschool.R;
+import cn.ccw.slagschool.schoolcloud.SampleSchoolCloud;
 import cn.ccw.slagschool.adapter.MyRecyclerViewAdapter;
 import cn.ccw.slagschool.base.BaseActivity;
 import cn.ccw.slagschool.base.BaseInteface;
 import cn.ccw.slagschool.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import cn.ccw.slagschool.recyclerview.RecyclerViewUtils;
+import cn.ccw.slagschool.utils.RecyclerViewStateUtils;
 import cn.ccw.slagschool.vo.SchoolInfo;
 import cn.ccw.slagschool.weight.LoadingFooter;
 import cn.ccw.slagschool.weight.PullRefreshLayout;
-import cn.ccw.slagschool.weight.SampleFooter;
 
 public class MainActivity extends BaseActivity implements BaseInteface {
     private PullRefreshLayout mPullRefreshLayout ;
@@ -133,7 +128,11 @@ public class MainActivity extends BaseActivity implements BaseInteface {
         adapter = new MyRecyclerViewAdapter(this,lists);
         mAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter) ;
         mRecyclerView.setAdapter(mAdapter);
-        RecyclerViewUtils.setFooterView(mRecyclerView, new SampleFooter(this));
+        /**
+         * 设置显示页尾
+         */
+        RecyclerViewStateUtils.setFooterViewState(this,mRecyclerView,5,LoadingFooter.State.TheEnd,null);
+        mRecyclerView.scrollToPosition(0);
     }
     /**
      * 这里是titleBar上面的图片点击事件
@@ -153,6 +152,12 @@ public class MainActivity extends BaseActivity implements BaseInteface {
                 startActivity(intent);
                 pw.dismiss();
                 overridePendingTransition(R.anim.zoomin, R.anim.zoomout) ;
+                break ;
+            case R.id.yun_layout:
+                Intent intent1 = new Intent(MainActivity.this, SampleSchoolCloud.class) ;
+                startActivity(intent1);
+                pw.dismiss();
+                overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
                 break ;
         }
     }

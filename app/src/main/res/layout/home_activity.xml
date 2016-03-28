@@ -9,18 +9,7 @@
     android:background="#00caca"
     tools:context=".activity/MainActivity">
     <include layout="@layout/title_bar" />
-    <cn.ccw.slagschool.weight.PullRefreshLayout
-        android:id="@+id/pullrefreshlayout"
-        android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-    </cn.ccw.slagschool.weight.PullRefreshLayout>
+    <include layout="@layout/home_pullpush"/>
 </LinearLayout>
 
 

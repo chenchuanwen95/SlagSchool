@@ -14,14 +14,14 @@
         app:layout_textSizePercent="7%"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="渣校"/>
+        android:text="@string/yindao_act_title"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_textSizePercent="3%"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:text="寻找属于你的地方"/>
+        android:text="@string/yindao_act_content"/>
     <TextView
         android:layout_width="1dp"
         android:layout_height="0dp"
@@ -32,5 +32,5 @@
         app:layout_textSizePercent="2%"
         android:layout_marginBottom="22dp"
         android:gravity="center"
-        android:text="C:1.0"/>
+        android:text="@string/yindao_act_version"/>
 </com.zhy.android.percent.support.PercentLinearLayout>

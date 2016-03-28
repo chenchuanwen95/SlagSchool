@@ -18,4 +18,15 @@
     <string name="list_footer_loading">正在加载中…</string>
     <string name="list_footer_network_error">点击重新加载</string>
     <string name="list_footer_end">已经到底了</string>
+    <string name="popupwindow_title">请选择</string>
+    <string name="popupwindow_search">搜索</string>
+    <string name="search_school_layout_title_chazhao">查找学校</string>
+    <string name="search_school_layout_content_id">学校编号/学校名称</string>
+    <string name="search_school_layout_content_search">搜索</string>
+    <string name="yindao_act_title">渣校</string>
+    <string name="yindao_act_content">让未来离你更近一步</string>
+    <string name="yindao_act_version">V:1.0</string>
+    <string name="title_bar_title">渣校列表</string>
+    <string name="recycler_item_onclick"><![CDATA[戳开查看详情-->]]></string>
+    <string name="popupwindow_yun">学校云</string>
 </resources>

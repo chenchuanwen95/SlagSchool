@@ -2,6 +2,7 @@ package cn.ccw.slagschool.weight;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ProgressBar;
@@ -41,10 +42,8 @@ public class LoadingFooter extends RelativeLayout {
     }
 
     public void init(Context context) {
-
         inflate(context, R.layout.sample_common_list_footer, this);
         setOnClickListener(null);
-
         setState(State.Normal, true);
     }
 
@@ -52,8 +51,9 @@ public class LoadingFooter extends RelativeLayout {
         return mState;
     }
 
-    public void setState(State status ) {
+    public void setState(State status) {
         setState(status, true);
+
     }
 
     /**
@@ -67,23 +67,18 @@ public class LoadingFooter extends RelativeLayout {
             return;
         }
         mState = status;
-
         switch (status) {
-
             case Normal:
                 setOnClickListener(null);
                 if (mLoadingView != null) {
                     mLoadingView.setVisibility(GONE);
                 }
-
                 if (mTheEndView != null) {
                     mTheEndView.setVisibility(GONE);
                 }
-
                 if (mNetworkErrorView != null) {
                     mNetworkErrorView.setVisibility(GONE);
                 }
-
                 break;
             case Loading:
                 setOnClickListener(null);
@@ -104,9 +99,7 @@ public class LoadingFooter extends RelativeLayout {
                 } else {
                     mLoadingView.setVisibility(VISIBLE);
                 }
-
                 mLoadingView.setVisibility(showView ? VISIBLE : GONE);
-
                 mLoadingProgress.setVisibility(View.VISIBLE);
                 mLoadingText.setText(R.string.list_footer_loading);
                 break;
@@ -115,11 +108,9 @@ public class LoadingFooter extends RelativeLayout {
                 if (mLoadingView != null) {
                     mLoadingView.setVisibility(GONE);
                 }
-
                 if (mNetworkErrorView != null) {
                     mNetworkErrorView.setVisibility(GONE);
                 }
-
                 if (mTheEndView == null) {
                     ViewStub viewStub = (ViewStub) findViewById(R.id.end_viewstub);
                     mTheEndView = viewStub.inflate();
@@ -145,11 +136,9 @@ public class LoadingFooter extends RelativeLayout {
                 } else {
                     mNetworkErrorView.setVisibility(VISIBLE);
                 }
-
                 mNetworkErrorView.setVisibility(showView ? VISIBLE : GONE);
                 break;
             default:
-
                 break;
         }
     }
