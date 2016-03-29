@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_textSizePercent="7%"
-        android:layout_marginTop="30dp"
+        app:layout_marginTopPercent="10%w"
         android:gravity="center"
         android:text="@string/yindao_act_title"/>
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         app:layout_textSizePercent="3%"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        app:layout_marginTopPercent="5%w"
         android:text="@string/yindao_act_content"/>
     <TextView
         android:layout_width="1dp"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_textSizePercent="2%"
-        android:layout_marginBottom="22dp"
+        app:layout_marginBottomPercent="5%w"
         android:gravity="center"
         android:text="@string/yindao_act_version"/>
 </com.zhy.android.percent.support.PercentLinearLayout>

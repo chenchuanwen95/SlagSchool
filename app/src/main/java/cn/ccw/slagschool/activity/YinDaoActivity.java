@@ -8,11 +8,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +24,17 @@ import cn.ccw.slagschool.fragment.YinDao1Fragment;
 import cn.ccw.slagschool.fragment.YinDao2Fragment;
 import cn.ccw.slagschool.fragment.YinDao3Fragment;
 import cn.ccw.slagschool.fragment.YinDao4Fragment;
+import cn.ccw.slagschool.utils.FileIsSaveUtils;
 
 /**
  * Created by 陈传稳_95 on 2016/3/9.
  */
 public class YinDaoActivity extends FragmentActivity{
-//    private ViewPager mViewPager ;
+    //    private ViewPager mViewPager ;
 //    private List<Fragment> mList ;
 //    private ImageView mImageView ;
     private AlphaAnimation mAlphaAnimation ;
+    private Intent intent;
 //    private boolean flag ;
 
     @Override
@@ -50,84 +54,39 @@ public class YinDaoActivity extends FragmentActivity{
      * 判断是否是第一次进入  这个判断暂时先不做
      */
     private void initDatas() {
-//        if(flag){
-//            mViewPager.setVisibility(View.VISIBLE);
-//            mImageView.setVisibility(View.INVISIBLE);
-//            mList = new ArrayList<>() ;
-//            mList.add(new YinDao1Fragment()) ;
-//            mList.add(new YinDao2Fragment()) ;
-//            mList.add(new YinDao3Fragment()) ;
-//            mList.add(new YinDao4Fragment()) ;
-//            mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-//
-//        }else{
-//            mViewPager.setVisibility(View.INVISIBLE);
-//            mImageView.setVisibility(View.VISIBLE);
-            new Thread(){
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-            Intent intent = new Intent(YinDaoActivity.this,MainActivity.class) ;
-            startActivity(intent);
-                    finish();
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            }.start();
-
-
-//        }
+                if(FileIsSaveUtils.isSaveFile(YinDaoActivity.this)){
+                    String text = FileIsSaveUtils.getFiles(YinDaoActivity.this) ;
+                    if("".equals(text)||text == null){
+                        intent = new Intent(YinDaoActivity.this,SelectSchoolOrStudent.class) ;
+                    }else if("MY NAME IS STUDENT".equals(text)){
+                        intent = new Intent(YinDaoActivity.this,MainActivity.class) ;
+                    }else if("MY NAME IS SCHOOL".equals(text)){
+                        intent = new Intent(YinDaoActivity.this,SelectSchoolOrStudent.class);
+                    }
+                }else{
+                    intent = new Intent(YinDaoActivity.this,SelectSchoolOrStudent.class) ;
+                }
+                startActivity(intent);
+                finish();
+            }
+        }.start();
     }
 
     /**
-     * 加载视图
+     * 加载视图 
      *
      */
     private void initViews() {
-//        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-//        mImageView = (ImageView) findViewById(R.id.act_welcome_image);
         mAlphaAnimation = (AlphaAnimation) AnimationUtils.loadAnimation(this,R.anim.yindao_anim);
     }
-
-   /* public class MyAdapter extends FragmentPagerAdapter{
-        public MyAdapter(FragmentManager fm){
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mList.size();
-        }
-    }*/
-
-    /**
-     * 点击事件
-     * @param view
-     */
-   /* public void nextClick(View view){
-        switch (view.getId()){
-            case R.id.yin1_next:
-                mViewPager.setCurrentItem(1);
-                break ;
-            case R.id.yin2_next:
-                mViewPager.setCurrentItem(2);
-                break ;
-            case R.id.yin3_next:
-                mViewPager.setCurrentItem(3);
-                break ;
-            case R.id.yin4_btn:
-                Intent intent = new Intent(YinDaoActivity.this,MainActivity.class) ;
-                startActivity(intent);
-                break ;
-        }
-    }*/
 
     @Override
     public void onBackPressed() {

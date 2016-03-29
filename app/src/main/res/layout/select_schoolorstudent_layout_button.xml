@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        app:layout_marginTopPercent="40%w"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%w"
+            app:layout_heightPercent="14%w"
+            app:layout_textSizePercent="6%w"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn__select_shape"
+            android:textColor="@drawable/btn_select_textcolor"
+            android:text="@string/select_layout_studnet"
+            android:id="@+id/select_layout_student" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%w"
+            app:layout_heightPercent="14%w"
+            app:layout_textSizePercent="6%w"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn__select_shape"
+            android:textColor="@drawable/btn_select_textcolor"
+            android:text="@string/select_layout_school"
+            android:id="@+id/select_layout_school" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</merge>

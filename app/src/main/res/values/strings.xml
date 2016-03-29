@@ -29,4 +29,6 @@
     <string name="title_bar_title">渣校列表</string>
     <string name="recycler_item_onclick"><![CDATA[戳开查看详情-->]]></string>
     <string name="popupwindow_yun">学校云</string>
+    <string name="select_layout_school">学校版</string>
+    <string name="select_layout_studnet">学生版</string>
 </resources>
