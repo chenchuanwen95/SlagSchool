@@ -20,22 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.ccw.slagschool.R;
-import cn.ccw.slagschool.fragment.YinDao1Fragment;
-import cn.ccw.slagschool.fragment.YinDao2Fragment;
-import cn.ccw.slagschool.fragment.YinDao3Fragment;
-import cn.ccw.slagschool.fragment.YinDao4Fragment;
 import cn.ccw.slagschool.utils.FileIsSaveUtils;
 
 /**
  * Created by 陈传稳_95 on 2016/3/9.
  */
 public class YinDaoActivity extends FragmentActivity{
-    //    private ViewPager mViewPager ;
-//    private List<Fragment> mList ;
-//    private ImageView mImageView ;
     private AlphaAnimation mAlphaAnimation ;
     private Intent intent;
-//    private boolean flag ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +61,7 @@ public class YinDaoActivity extends FragmentActivity{
                     }else if("MY NAME IS STUDENT".equals(text)){
                         intent = new Intent(YinDaoActivity.this,MainActivity.class) ;
                     }else if("MY NAME IS SCHOOL".equals(text)){
-                        intent = new Intent(YinDaoActivity.this,SelectSchoolOrStudent.class);
+                        intent = new Intent(YinDaoActivity.this,ConfirmSchoolInfo.class);
                     }
                 }else{
                     intent = new Intent(YinDaoActivity.this,SelectSchoolOrStudent.class) ;
@@ -81,7 +73,7 @@ public class YinDaoActivity extends FragmentActivity{
     }
 
     /**
-     * 加载视图 
+     * 加载视图
      *
      */
     private void initViews() {

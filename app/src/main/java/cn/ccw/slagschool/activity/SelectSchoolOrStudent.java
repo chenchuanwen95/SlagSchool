@@ -61,7 +61,10 @@ public class SelectSchoolOrStudent extends BaseActivity implements BaseInteface,
                 FileIsSaveUtils.setFiles(getBac(),"MY NAME IS STUDENT");
                 break ;
             case R.id.select_layout_school:
-                toastS("点击了学校版");
+                intent = new Intent(getBac(),ConfirmSchoolInfo.class) ;
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 FileIsSaveUtils.setFiles(getBac(), "MY NAME IS SCHOOL");
                 break ;
         }

@@ -145,7 +145,7 @@ public class Tag implements Comparable<Tag>{
 	private String text, url;
 	private int popularity;  //这是标签的重要性/流行
 	private int textSize;
-	private float locX, locY, locZ; //3 d的中心标记
+	private float locX, locY, locZ; //3d的中心标记
 	private float loc2DX, loc2DY;
 	private float scale;
 	private float colorR, colorG, colorB, alpha;

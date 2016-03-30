@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">渣校</string>
+    <string name="app_name">名校</string>
     <string name="yin_next">下一页</string>
     <string name="yin_action">点击进入</string>
     <array name="scheme_colors">
@@ -23,12 +23,19 @@
     <string name="search_school_layout_title_chazhao">查找学校</string>
     <string name="search_school_layout_content_id">学校编号/学校名称</string>
     <string name="search_school_layout_content_search">搜索</string>
-    <string name="yindao_act_title">渣校</string>
+    <string name="yindao_act_title">学校</string>
     <string name="yindao_act_content">让未来离你更近一步</string>
     <string name="yindao_act_version">V:1.0</string>
-    <string name="title_bar_title">渣校列表</string>
+    <string name="title_bar_title">学校列表</string>
     <string name="recycler_item_onclick"><![CDATA[戳开查看详情-->]]></string>
     <string name="popupwindow_yun">学校云</string>
     <string name="select_layout_school">学校版</string>
     <string name="select_layout_studnet">学生版</string>
+    <string name="confirm_school_info_title">确认加入名校</string>
+    <string name="confirm_school_info_schoolid">请输入学校编号</string>
+    <string name="confirm_school_info_name">请输入学校名称</string>
+    <string name="confirm_school_info_jiaruma">请输入加入码</string>
+    <string name="confirm_school_info_queren_btn">确认信息</string>
+    <string name="confirm_school_info_gobye_btn">返回界面</string>
+    <string name="confirm_school_info_queren_tv">《 确认信息之前请仔细阅读加入条款 》</string>
 </resources>

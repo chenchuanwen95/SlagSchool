@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ecf0f1"
+        android:gravity="center_horizontal">
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="70%w"
+            app:layout_heightPercent="12%w"
+            app:layout_marginTopPercent="30%w"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:id="@+id/confirm_school_info_id"
+            android:textColorHint="#5000caca"
+            android:textColor="#00caca"
+            android:background="@drawable/edittext_xuanzhong"
+            android:hint="@string/confirm_school_info_schoolid" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="70%w"
+            app:layout_heightPercent="12%w"
+            app:layout_marginTopPercent="3%w"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:id="@+id/confirm_school_info_name"
+            android:textColorHint="#5000caca"
+            android:textColor="#00caca"
+            android:background="@drawable/edittext_xuanzhong"
+            android:hint="@string/confirm_school_info_name" />
+        <include layout="@layout/confirm_school_info_layout_item_jiaru"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_textSizePercent="3%w"
+            app:layout_marginTopPercent="2%w"
+            app:layout_widthPercent="70%w"
+            android:gravity="center_vertical"
+            android:textColor="#00caca"
+            android:textStyle="italic"
+            android:text="@string/confirm_school_info_queren_tv"/>
+        <include layout="@layout/confirm_school_info_layout_item_btn"/>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</merge>

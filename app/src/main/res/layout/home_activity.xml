@@ -10,6 +10,7 @@
     tools:context=".activity/MainActivity">
     <include layout="@layout/title_bar" />
     <include layout="@layout/home_pullpush"/>
+
 </LinearLayout>
 
 

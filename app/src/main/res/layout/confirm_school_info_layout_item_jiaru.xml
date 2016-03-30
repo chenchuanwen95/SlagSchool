@@ -4,37 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.zhy.android.percent.support.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ecf0f1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="70%w"
+        app:layout_heightPercent="14%w"
+        app:layout_marginTopPercent="3%w"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <EditText
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_widthPercent="80%w"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="17%w"
             android:paddingLeft="5dp"
-            android:layout_marginLeft="5dp"
             android:singleLine="true"
-            android:id="@+id/search_et"
+            android:id="@+id/confirm_school_info_jiaruma"
             android:textColorHint="#5000caca"
             android:textColor="#00caca"
             android:background="@drawable/edittext_xuanzhong"
-            android:hint="@string/search_school_layout_content_id"
-            android:layout_weight="0.8" />
-
-        <Button
+            android:hint="@string/confirm_school_info_jiaruma" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.2"/>
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_widthPercent="20%w"
-            app:layout_heightPercent="12%w"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            app:layout_textSizePercent="3.5%"
-            android:textColor="@drawable/btn_textcolor"
-            android:text="@string/search_school_layout_content_search"
-            android:background="@drawable/btn_selector"
-            android:id="@+id/search_btn"/>
+            app:layout_widthPercent="13%w"
+            app:layout_heightPercent="10%w"
+            android:src="@drawable/iconfontwenhao"/>
     </com.zhy.android.percent.support.PercentLinearLayout>
 </merge>

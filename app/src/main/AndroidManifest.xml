@@ -35,6 +35,10 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity android:name=".activity.ConfirmSchoolInfo"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
     </application>
 
 </manifest>
