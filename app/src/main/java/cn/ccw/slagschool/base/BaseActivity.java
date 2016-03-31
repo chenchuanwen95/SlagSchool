@@ -1,12 +1,12 @@
 package cn.ccw.slagschool.base;
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 /**
  * Created by 陈传稳_95 on 2016/3/9.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
     private BaseActivity bac ;
 
     public BaseActivity getBac() {

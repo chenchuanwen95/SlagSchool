@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:id="@+id/school_activity_linear2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
+        <TextView
+            android:id="@+id/school_activity_linear2_text1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            app:layout_textSizePercent="7%w"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="textOnClick"
+            android:background="@color/write"
+            android:textColor="@color/green1"
+            android:text="@string/school_activity_caidan_xiangqing"/>
+        <TextView
+            android:id="@+id/school_activity_linear2_text2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            app:layout_textSizePercent="7%w"
+            android:clickable="true"
+            android:onClick="textOnClick"
+            android:gravity="center"
+            android:text="@string/school_activity_caidan_weihu"/>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+</merge>

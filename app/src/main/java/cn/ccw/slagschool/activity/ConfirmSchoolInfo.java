@@ -16,7 +16,8 @@ import cn.ccw.slagschool.utils.FileIsSaveUtils;
  * Created by 陈传稳_95 on 2016/3/30.
  */
 public class ConfirmSchoolInfo extends BaseActivity implements BaseInteface,View.OnClickListener {
-    private Button btn_gobye ;
+    private Button btn_gobye,btn_jiaru ;
+    private Intent intent ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,9 @@ public class ConfirmSchoolInfo extends BaseActivity implements BaseInteface,View
     @Override
     public void initViews() {
         btn_gobye = (Button) findViewById(R.id.confirm_school_info_gobye);
+        btn_jiaru = (Button) findViewById(R.id.confirm_school_info_queren);
         btn_gobye.setOnClickListener(this);
+        btn_jiaru.setOnClickListener(this);
     }
 
     @Override
@@ -49,13 +52,16 @@ public class ConfirmSchoolInfo extends BaseActivity implements BaseInteface,View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.confirm_school_info_gobye:
-                FileIsSaveUtils.setFiles(getBac(),"");
-                Intent intent = new Intent(ConfirmSchoolInfo.this,SelectSchoolOrStudent.class) ;
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
+                FileIsSaveUtils.setFiles(getBac(), "");
+                intent = new Intent(ConfirmSchoolInfo.this,SelectSchoolOrStudent.class) ;
                 break ;
+            case R.id.confirm_school_info_queren:
+                intent = new Intent(ConfirmSchoolInfo.this,SchoolActivity.class) ;
+                break;
         }
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.zoomin,R.anim.zoomout);
     }
 
     @Override

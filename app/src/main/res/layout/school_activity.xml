@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:background="@color/green1"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/school_activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.06"
+        app:layout_textSizePercent="6%w"
+        android:gravity="center"
+        android:textColor="@color/write"
+        android:text="@string/school_activity_title"/>
+    <include layout="@layout/school_activity_fragment"/>
+    <include layout="@layout/school_activity_caidan"/>
+</com.zhy.android.percent.support.PercentLinearLayout>
